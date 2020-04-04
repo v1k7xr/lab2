@@ -1,14 +1,14 @@
 <?php 
-require('configReader.php');
+require('../lib/configReader.php');
 
 class DataBaseWorker {
 
     private $connectionData;
-    private $connection;
+    protected $connection;
     private $cnfReader;
 
     public function __construct() {
-        $this->cnfReader = new ConfigReader('conf.json');
+        $this->cnfReader = new ConfigReader('dbConf.json');
         $this->connectionData = $this->cnfReader->getDataArrayFromConfigFile();
     }
 
@@ -26,17 +26,13 @@ class DataBaseWorker {
         }
     }
 
-    public function testQuery() {
-        $testQ = "select * from \"User\"";
-        $stmt = $this->connection->query($testQ);
-        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-            echo $row["username"];
-        }
+    public function closeConnection() {
+        $this->connection = null;
     }
 }
 
-$test = new DataBaseWorker();
-$test->startConnection();
-$test->testQuery();
+// $test = new DataBaseWorker();
+// $test->startConnection();
+// $test->testQuery();
 
 ?>

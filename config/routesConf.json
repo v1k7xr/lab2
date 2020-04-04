@@ -1,0 +1,5 @@
+{
+    "main" : "main/index", 
+    "registration" : "registration", 
+    "autorisation" : "autorisation"
+}
