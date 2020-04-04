@@ -1,4 +1,4 @@
 /logs
 /bin
-/config/conf.json
+/config/dbConf.json
 /storagedir
