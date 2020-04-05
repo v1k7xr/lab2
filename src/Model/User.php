@@ -35,6 +35,11 @@ class User {
         return false;
     }
 
+    /**
+     * Check for the existence of a record in the database with this email
+     * @param string $email
+     * @return bool 
+     */
     public static function checkEmailNovelty(string $email) : bool {
         $user = new DBWUser();
 
@@ -52,6 +57,18 @@ class User {
         $result = $user->addNewUser($name, $email, $passHash);
         $user->closeConnection();
         return $result;
+    }
+
+    public static function checkUserData(string $email, string $password) {
+        $user = new DBWUser();
+        $userId = $user->checkUser($email, $password);
+        $user->closeConnection();
+        return $userId;
+    }
+
+    public static function userAuth(int $id) {
+        session_start();
+        $_SESSION['userid'] = $userId;
     }
 }
 

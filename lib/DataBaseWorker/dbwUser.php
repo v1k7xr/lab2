@@ -30,6 +30,23 @@ class DBWUser extends DataBaseWorker {
 
         return $stmt->execute();
     }
+
+    public function checkUser(string $email, string $password) {
+        $this->startConnection();
+
+        $stmt = $this->connection->prepare('SELECT userid, userpsswrd FROM "User" WHERE "User".useremail = :email ');
+
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        $userInfo = $stmt->fetch();
+
+        if (password_verify($password, $userInfo['userpsswrd'])) {
+            return $userInfo['userid'];
+        }
+        return false;
+    }
 }
 
 ?>

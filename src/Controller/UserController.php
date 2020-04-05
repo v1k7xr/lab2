@@ -3,8 +3,36 @@ include_once("../src/Model/User.php");
 
 class UserController {
 
-    public function actionAutorisation() {
-        return "Autorisation here";
+    public function actionLogin() {
+        $email = '';
+        $password = '';
+
+        if (isset($_POST['submit'])) {
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+
+            $errors = false;
+
+            if (!User::checkEmail($email)) {
+                $errors[] = 'Incorrect email!';
+            }
+
+            if (!User::checkPassword($password, $password)) {
+                $errors[] = 'Incorrect password';
+            }
+
+            $userId = User::checkUserData($email, $password);
+
+            if ($userId == false) {
+                $errors[] = 'Incorrect data for login!';
+            } else {
+                User::userAuth($userId);
+
+                header("Location: /posts/");
+            }
+        }
+        require_once("../src/View/User/login.php");
+        return true;
     }
 
     public function actionRegistration() {
@@ -42,21 +70,11 @@ class UserController {
             if ($errors == false) {
                 $result = User::saveUser($name, $email, $password);
             }
-            // if (isset($name)) {
-            //     echo "<br>name: " . $name;
-            // } 
-
-            // if (isset($email)) {
-            //     echo "<br>email: " . $email;
-            // }
-
-            // if (isset($password)) {
-            //     echo "<br>password: " . $password;
-            // }
         }
         require_once("../src/View/User/register.php");
         return true;
     }
+
 }
 
 ?>
