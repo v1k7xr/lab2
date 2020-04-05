@@ -20,9 +20,11 @@ class DBWPosts extends DataBaseWorker {
         $stmt = $this->connection->prepare('SELECT postadddate, postdescription, postname, username FROM post
                                                 LEFT JOIN "User"
                                                 ON post.userid = "User".userid
-                                                WHERE post.postid=:id');       
+                                                WHERE post.postid = :id');       
 
-        $stmt->execute(['id' => $id]);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+        $stmt->execute();
 
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
