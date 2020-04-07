@@ -1,5 +1,5 @@
 <?php
-include_once("../lib/DataBaseWorker/dbwPosts.php");
+include_once("../lib/DataBaseWorker/DBWPosts.php");
 
 class Posts {
 

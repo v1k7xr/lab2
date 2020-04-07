@@ -7,11 +7,7 @@ class PostsController {
     public function actionIndex () {
         $newPostsList = [];
         $newPostsList = Posts::getAllPosts();
-
-        echo "<pre>";
-        print_r($newPostsList);
-        echo "<pre>";
-
+        require_once("../src/View/Posts/main.php");
         return true;
     }
 
@@ -19,9 +15,7 @@ class PostsController {
         if ($id) {
             $postItem = Posts::getPostById($id);
 
-            echo "<pre>";
             print_r($postItem);
-            echo "<pre>";
         }
         return true;
     }

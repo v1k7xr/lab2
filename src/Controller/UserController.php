@@ -21,12 +21,14 @@ class UserController {
                 $errors[] = 'Incorrect password';
             }
 
-            $userId = User::checkUserData($email, $password);
+            $userInfo = User::checkUserData($email, $password);
 
-            if ($userId == false) {
+            var_dump($userInfo);
+
+            if ($userInfo == false) {
                 $errors[] = 'Incorrect data for login!';
             } else {
-                User::userAuth($userId);
+                User::userAuth($userInfo);
 
                 header("Location: /posts/");
             }
@@ -72,6 +74,12 @@ class UserController {
             }
         }
         require_once("../src/View/User/register.php");
+        return true;
+    }
+
+    public function actionLogout() {
+        User::userLogout();
+        header("Location: /posts/");
         return true;
     }
 

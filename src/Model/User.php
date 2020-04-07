@@ -1,5 +1,5 @@
 <?php 
-include_once("../lib/DataBaseWorker/dbwUser.php");
+include_once("../lib/DataBaseWorker/DBWUser.php");
 
 
 class User {
@@ -61,14 +61,21 @@ class User {
 
     public static function checkUserData(string $email, string $password) {
         $user = new DBWUser();
-        $userId = $user->checkUser($email, $password);
+        $userInfo = $user->checkUser($email, $password);
         $user->closeConnection();
-        return $userId;
+        return $userInfo;
     }
 
-    public static function userAuth(int $id) {
+    public static function userAuth(array $userInfo) {
         session_start();
-        $_SESSION['userid'] = $userId;
+        $_SESSION['userid'] = $userInfo['userId'];
+        $_SESSION['username'] = $userInfo['userName'];
+    }
+
+    public static function userLogout() {
+        session_start();
+        unset($_SESSION['userid']);
+        unset($_SESSION['username']);
     }
 }
 

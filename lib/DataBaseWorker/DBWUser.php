@@ -34,7 +34,7 @@ class DBWUser extends DataBaseWorker {
     public function checkUser(string $email, string $password) {
         $this->startConnection();
 
-        $stmt = $this->connection->prepare('SELECT userid, userpsswrd FROM "User" WHERE "User".useremail = :email ');
+        $stmt = $this->connection->prepare('SELECT userid, userpsswrd, username FROM "User" WHERE "User".useremail = :email ');
 
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
 
@@ -43,7 +43,10 @@ class DBWUser extends DataBaseWorker {
         $userInfo = $stmt->fetch();
 
         if (password_verify($password, $userInfo['userpsswrd'])) {
-            return $userInfo['userid'];
+            return [
+                "userId" => $userInfo['userid'],
+                "userName" => $userInfo['username'],
+            ];
         }
         return false;
     }

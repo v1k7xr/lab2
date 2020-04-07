@@ -5,6 +5,7 @@ return [
     "posts" => "posts/index", 
     "user/registration" => "user/registration",
     "user/login" => "user/login",
+    "user/logout" => "user/logout",
 ];
 
 ?>
