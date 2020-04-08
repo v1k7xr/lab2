@@ -1,14 +1,9 @@
 <?php 
 
 require_once("../src/Controller/UserController.php");
+require_once("../src/View/templates/header.php");
 #header here
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" type="text/css" href="/css/registerForm.css">
-</head>
-<body>
 <section>
     <? if (isset($result) && $result): ?>
         <? header("Location : /user/login") ?>
@@ -35,7 +30,7 @@ require_once("../src/Controller/UserController.php");
                 <input type="password" name="passwordRepeat" placeholder="Повторите пароль" value=""/>
                 <input type="checkbox" id="confirmed" name="confirmed">
                     <label for="confirmed">Согласен с <a href = "#">условиями и политикой конфиденциальности</a>.</label>
-                <input type="submit" name="submit" class="registerbtn" value="Регистрация" />
+                <input type="submit" name="submit" class="submitbtn" value="Регистрация" />
                 <div class="container signin">
                     <p>Уже есть аккаунт? <a href="http://localhost:9000/user/login">Войти</a>.</p>
                 </div>                

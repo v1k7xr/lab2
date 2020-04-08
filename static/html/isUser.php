@@ -1,7 +1,18 @@
-<p>Здравствуйте,  <? echo $_SESSION['username'] . "! "; ?></p>
-<form method="LINK" action="http://localhost:9000/posts/1">
-    <input type="submit" value="Загрузить файлы">
-</form>
-<form method="LINK" action="http://localhost:9000/user/logout">
-    <input type="submit" value="Выход">
-</form>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-5 my-auto">
+			<h3 class="text-center">
+            Здравствуйте,  <? echo $_SESSION['username'] . "! "; ?>
+			</h3>
+		</div>
+		<div class="col-md-1">
+			 
+        <a class="btn btn-success" href="#" role="button">Создать пост</a>
+		</div>
+		<div class="col-md-1">
+			 
+        <a class="btn btn-success" href="http://localhost:9000/user/logout" role="button">Выйти</a>
+        </div>
+
+	</div>
+</div>

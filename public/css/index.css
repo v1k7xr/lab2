@@ -1,0 +1,26 @@
+body {
+    font-size: 25px; /* font-size 1em = 10px on default browser settings */
+  }
+
+.col-md-4-infouse {
+    border-style: dashed;
+    border-color: #468847;
+}
+
+
+.center {
+    width: 200px; /* Ширина элемента в пикселах */
+    padding: 10px; /* Поля вокруг текста */
+    margin: auto; /* Выравниваем по центру *//* Цвет фона */
+   }
+
+A {
+    color: white; /* Цвет ссылок */
+}
+A:visited {
+    color: white; /* Цвет посещенных ссылок */
+}
+A:active {
+    color: white; /* Цвет активных ссылок */
+}
+  

@@ -56,10 +56,10 @@ class DBWPosts extends DataBaseWorker {
         
         while ($row = $stmt->fetch()) {
             $pstsList[] = [
-                'post_id' => $row['postid'],
-                'author_name' => $row['username'],
+                'postid' => $row['postid'],
+                'authorname' => $row['username'],
                 'date' => $row['postadddate'],
-                'name' => $row['postname'],
+                'postname' => $row['postname'],
             ];
         }
 
