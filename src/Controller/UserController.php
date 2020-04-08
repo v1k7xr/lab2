@@ -14,11 +14,11 @@ class UserController {
             $errors = false;
 
             if (!User::checkEmail($email)) {
-                $errors[] = 'Incorrect email!';
+                $errors[] = 'Email введен некорректно';
             }
 
             if (!User::checkPassword($password, $password)) {
-                $errors[] = 'Incorrect password';
+                $errors[] = 'Пароль введен некорректно';
             }
 
             $userInfo = User::checkUserData($email, $password);
@@ -26,7 +26,7 @@ class UserController {
             var_dump($userInfo);
 
             if ($userInfo == false) {
-                $errors[] = 'Incorrect data for login!';
+                $errors[] = 'Неверный логин или пароль!';
             } else {
                 User::userAuth($userInfo);
 
@@ -53,19 +53,19 @@ class UserController {
             $result = false;
 
             if (!User::checkName($name)) {
-                $errors[] = 'Incorrect name!';
+                $errors[] = 'Имя введено некорректно (разрешена кириллица, пробелы и дефисы)';
             }
 
             if (!User::checkEmail($email)) {
-                $errors[] = 'Incorrect email!';
+                $errors[] = 'Email введен некорректно';
             }
 
             if (!User::checkPassword($password, $repeatedPassword)) {
-                $errors[] = 'Incorrect password';
+                $errors[] = 'Пароль введен некорректно (должен быть длиннее 6 символов)';
             }
 
             if (!User::checkEmailNovelty($email)) {
-                $errors[] = 'User with this email already exsist!';
+                $errors[] = 'Пользователь с таким email-ом уже существует';
             }
 
 

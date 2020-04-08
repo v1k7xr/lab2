@@ -20,6 +20,14 @@ class Router {
     }
 
     public function run() {
+        $extensions = array("jpg", "jpeg", "gif", "css", "html");
+
+        $path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+        $ext = pathinfo($path, PATHINFO_EXTENSION);
+        if (in_array($ext, $extensions)) {
+            // let the server handle the request as-is
+            return false;  
+        }
         #1 get url
         $uri = $this->getURI();
         #2 Check this url in routes.php
@@ -64,5 +72,3 @@ class Router {
         }
     }
 }
-
-?>

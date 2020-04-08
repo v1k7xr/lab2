@@ -1,10 +1,14 @@
 <?php 
-
-require_once("../src/View/templates/header.php");
-require_once("../src/Controller/PostsController.php")
+require_once("../src/Controller/PostsController.php");
+require_once("../src/View/templates/whoiswho.php");
 
 ?>
-
+<!DOCTYPE html>
+<html>
+<head>
+    <title> posts page </title>
+</head>
+<body>
 <? if (isset($newPostsList)) : ?>
     <ul>
         <? foreach ($newPostsList as $post): ?>
@@ -14,3 +18,5 @@ require_once("../src/Controller/PostsController.php")
 <? else : ?>
     <h1> Oops, looks like something unplanned </h1>
 <? endif; ?>
+</body>
+</html>
