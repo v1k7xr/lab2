@@ -7,7 +7,7 @@
 		</div>
 		<div class="col-md-1">
 			 
-        <a class="btn btn-success" href="#" role="button">Создать пост</a>
+        <a class="btn btn-success" href="http://localhost:9000/posts/add" role="button">Создать пост</a>
 		</div>
 		<div class="col-md-1">
 			 

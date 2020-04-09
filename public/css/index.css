@@ -15,12 +15,21 @@ body {
    }
 
 A {
-    color: white; /* Цвет ссылок */
+    color: black; /* Цвет ссылок */
 }
 A:visited {
-    color: white; /* Цвет посещенных ссылок */
+    color: black; /* Цвет посещенных ссылок */
 }
 A:active {
-    color: white; /* Цвет активных ссылок */
+    color: black; /* Цвет активных ссылок */
 }
-  
+
+.col-md-4 {
+    text-align: center;
+}
+
+.row-border-margin {
+    margin: 0 1em 0.5em 1em;
+    border-bottom: outset;
+    border-color: #468847;
+}

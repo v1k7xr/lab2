@@ -1,14 +1,9 @@
 <?php 
 
 require_once("../src/Controller/UserController.php");
+require_once("../src/View/templates/header.php");
 #header here
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" type="text/css" href="/css/reglogform.css">
-</head>
-<body>
 <section>
         <? if (isset($errors) && is_array($errors)): ?>
             <ul>
