@@ -67,6 +67,45 @@ class DBWPosts extends DataBaseWorker {
         
         return $pstsList;
     }
+
+    public function addNewPost(array $postInfo) : int {
+
+        $this->startConnection();
+
+        $sql = 'INSERT INTO post (userid, postadddate, postdescription, postname) VALUES ( :userid , :postadddate , :postdescription , :postname ) RETURNING postid;';
+
+        $stmt = $this->connection->prepare($sql);
+
+        $stmt->execute($postInfo);
+
+        $newPostId = $stmt->fetchAll();
+
+        $newPostId = $newPostId[0]['postid'];
+
+        if (is_int($newPostId)) {
+            return $newPostId;
+        }
+
+        return -1;
+    }
+
+    public function addNewFiles(array $filesInfo, int $postId) {
+        
+        $this->startConnection();
+
+        $stmt = $this->connection->prepare('INSERT INTO "file" (postid, filenameuser, filenamehashsum) VALUES ( :postid , :filenameuser , :filenamehashsum )');
+
+        echo "from dbclass: " . print_r($filesInfo) . "<br>";
+
+        foreach ($filesInfo as $fileInfo) {
+            echo print_r($fileInfo) . "<br>";
+            $stmt->bindValue(':postid', $postId);
+            $stmt->bindValue(':filenameuser', $fileInfo['filenameuser']);
+            $stmt->bindValue(':filenamehashsum', $fileInfo['filenamehashsum']);
+            $stmt->execute();
+        }
+
+    }
 }
 
 ?>

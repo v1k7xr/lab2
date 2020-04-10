@@ -24,6 +24,10 @@ class PostsController {
         $postname = "";
         $postdescription = "";
         $files = false;
+        $filesOnServer = []; // names and their types on server
+        $uploadErrors = []; // upload errors
+        $uploadWithoutErrors = true;
+        $postData = [];
         session_start();
         if (isset($_POST['submit'])) {
             $postname = $_POST['postname'];
@@ -44,9 +48,25 @@ class PostsController {
                 ];
             }
             
-            $checkFiles = Posts::checkFileTypes($files);
-            if ($checkFiles) {
-                echo "files okay" . "<br>";
+            $files = Posts::checkAddFileTypes($files); // check uploaded file types on allowed filetype
+            $uploadErrors = array_column($files, 'error');
+            $uploadWithoutErrors = Posts::uploadErrorsCheck($uploadErrors); // check that's all ok with uploads
+            if ($files != false && $uploadWithoutErrors) {
+                $filesOnServer = Posts::saveRenamedFilesOnServer($files); // save file on server
+
+                //collect post (don't method) data from form
+                $postData = [
+                    'userid' => $_SESSION['userid'],
+                    'postadddate' => date("Y-m-d"),
+                    'postname' => $postname,
+                    'postdescription' => $postdescription,
+                ];
+
+                $newPostId = Posts::saveNewPostDataBase($postData); // save post data to DB
+
+                Posts::saveFilesInfo($filesOnServer, $newPostId);
+
+                header("Location: /posts/" . $newPostId);
             }
         }
 
