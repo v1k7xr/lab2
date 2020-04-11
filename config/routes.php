@@ -7,6 +7,7 @@ return [
     "user/registration" => "user/registration",
     "user/login" => "user/login",
     "user/logout" => "user/logout",
+    "^upload\?[a-zA-z0-9\=\.\&\%\-\_()\[\]\{\}\#\$\!\?а-яА-Я]+" => "posts/upload",
 ];
 
 ?>

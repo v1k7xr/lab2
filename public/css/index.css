@@ -4,7 +4,7 @@ body {
 
 .col-md-4-infouse {
     border-style: dashed;
-    border-color: #468847;
+    border-color: white;
 }
 
 
@@ -14,14 +14,13 @@ body {
     margin: auto; /* Выравниваем по центру *//* Цвет фона */
    }
 
-A {
-    color: black; /* Цвет ссылок */
+a:link {
+    color: white;
 }
-A:visited {
-    color: black; /* Цвет посещенных ссылок */
-}
-A:active {
-    color: black; /* Цвет активных ссылок */
+  
+  /* visited link */
+a:visited {
+    color: black;
 }
 
 .col-md-4 {
@@ -32,4 +31,8 @@ A:active {
     margin: 0 1em 0.5em 1em;
     border-bottom: outset;
     border-color: #468847;
+}
+
+.clrsd {
+    background-color: white;
 }

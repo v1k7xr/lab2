@@ -138,6 +138,98 @@ class Posts {
         $dbwPsts->addNewFiles($filesOnServer, $postId);
         $dbwPsts->closeConnection();
     }
+
+    public static function checkPostName(string $postName) : bool {
+        if (strlen($postName) > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function checkPostDescription(string $postDescription) : bool {
+        if (strlen($postDescription) > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function checkFilesCount($fileCount) {
+        if ($fileCount > 0 && $fileCount < 10) { // 10 - max upload files in php.ini
+            return true;
+        } 
+        return false;
+    }
+
+    public static function getFiles(int $id) : array {
+        $dbwPsts = new DBWPosts();
+        $filesInfo = $dbwPsts->getAllFilesInfo($id);
+        $dbwPsts->closeConnection();
+        return $filesInfo;
+    }
+
+    public static function uploadFile(string $fileNameUser, string $fileNameServer) {
+        $fullDir = Posts::getDir($fileNameUser, $fileNameServer);
+
+        Posts::upload($fileNameUser, $fullDir);
+    }
+
+    public static function uploadAllFilesZip(array $files, string $postName) {
+        $tempFilePath = "tempzip/" . time() . ".zip";
+        $pathToFile = "";
+
+        $zip = new ZipArchive();
+ 
+        if ($zip->open($tempFilePath, ZipArchive::CREATE)!==TRUE) {
+            exit("Невозможно открыть <$tempFilePath>\n");
+        }
+
+        foreach ($files as $file) {
+            $pathToFile = Posts::getDir($file['filenameuser'], $file['filenamehashsum']);
+            $zip->addFile($pathToFile, $file['filenameuser']);
+        }
+
+        $zip->close();
+
+        Posts::upload($postName, $tempFilePath);
+
+        unlink(realpath($tempFilePath));
+    }
+
+    public static function upload($fileNameUser, $fileNameOnServer) {
+        if (file_exists($fileNameOnServer)) {
+            // buff staff clean
+            if (ob_get_level()) {
+              ob_end_clean();
+            }
+            // open save window in browser
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename=' . $fileNameUser);
+            header('Content-Transfer-Encoding: binary');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($fileNameOnServer));
+
+            readfile($fileNameOnServer);
+            
+          }
+    }
+
+    public static function getDir(string $fileNameUser, string $fileNameOnServer) {
+        $maindir = "../storagedir/";
+        $re = '/\.[a-z]{3,4}$/m';
+
+        $fileType = "";
+
+        preg_match($re, $fileNameUser, $fileType);
+
+        $stdir = substr($fileNameOnServer, 0, 2); //1st dir
+        $nddir = substr($fileNameOnServer, 0, 5); //2nd dir
+
+        return $maindir . $stdir . "/" . $nddir . "/" . $fileNameOnServer . $fileType[0];
+    }
+
 }
 
 ?>

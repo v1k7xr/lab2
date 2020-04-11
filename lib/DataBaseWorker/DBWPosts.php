@@ -95,10 +95,7 @@ class DBWPosts extends DataBaseWorker {
 
         $stmt = $this->connection->prepare('INSERT INTO "file" (postid, filenameuser, filenamehashsum) VALUES ( :postid , :filenameuser , :filenamehashsum )');
 
-        echo "from dbclass: " . print_r($filesInfo) . "<br>";
-
         foreach ($filesInfo as $fileInfo) {
-            echo print_r($fileInfo) . "<br>";
             $stmt->bindValue(':postid', $postId);
             $stmt->bindValue(':filenameuser', $fileInfo['filenameuser']);
             $stmt->bindValue(':filenamehashsum', $fileInfo['filenamehashsum']);
@@ -106,6 +103,19 @@ class DBWPosts extends DataBaseWorker {
         }
 
     }
+
+    public function getAllFilesInfo(int $id) {
+        $this->startConnection();
+
+        $stmt = $this->connection->prepare('SELECT fileid, filenameuser, filenamehashsum FROM "file" WHERE postid = :postid ');
+
+        $stmt->bindValue(':postid', $id);
+
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
 }
 
 ?>
