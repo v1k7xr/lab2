@@ -1,18 +1,6 @@
 body {
     font-size: 25px; /* font-size 1em = 10px on default browser settings */
-  }
-
-.col-md-4-infouse {
-    border-style: dashed;
-    border-color: white;
 }
-
-
-.center {
-    width: 200px; /* Ширина элемента в пикселах */
-    padding: 10px; /* Поля вокруг текста */
-    margin: auto; /* Выравниваем по центру *//* Цвет фона */
-   }
 
 a:link {
     color: white;
@@ -20,7 +8,7 @@ a:link {
   
   /* visited link */
 a:visited {
-    color: black;
+    color: white;
 }
 
 .col-md-4 {
@@ -35,4 +23,48 @@ a:visited {
 
 .clrsd {
     background-color: white;
+}
+
+body {
+    background-color: black;
+}
+
+p {
+    color: white;
+}
+
+h1, h3 {
+    color: white;
+}
+
+label {
+    color: white;
+}
+
+.file {
+    border-right-color: green; /* Цвет линии справа */
+    border-right-style: dotted; /* Стиль линии */
+    border-right-width: 1px; /* Толщина линии */
+    border-left-color: green; /* Цвет линии слева */
+    border-left-style: dotted; /* Стиль линии */
+    border-left-width: 1px; /* Толщина линии */
+}
+
+.btnDownload {
+    background-color: green;
+    border-radius: 5px;
+    color: black;
+    border-color: chartreuse;
+}
+
+input[type="file"] {
+    display: none;
+}
+ 
+/* Собственно стилизируем кнопку в соответствии с нужным внешним видом */
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
 }

@@ -28,12 +28,26 @@ require_once("../src/View/templates/header.php");
                 <input type="password" name="password" placeholder="Пароль" value=""/>
                 <label for="passwordRepeat"><b>Повторите пароль</b></label>
                 <input type="password" name="passwordRepeat" placeholder="Повторите пароль" value=""/>
-                <input type="checkbox" id="confirmed" name="confirmed">
+                <input type="checkbox" checked id="confirmed" name="confirmed">
                     <label for="confirmed">Согласен с <a href = "#">условиями и политикой конфиденциальности</a>.</label>
-                <input type="submit" name="submit" class="submitbtn" value="Регистрация" />
+                <input type="submit" id="regButton" name="submit" class="submitbtn" value="Регистрация" />
                 <div class="container signin">
                     <p>Уже есть аккаунт? <a href="http://localhost:9000/user/login">Войти</a>.</p>
                 </div>                
              </form>
     </div>
 </section>
+
+<script>
+
+var checker = document.getElementById('confirmed');
+var sendbtn = document.getElementById('regButton');
+checker.onchange = function(){
+if(this.checked && sendbtn.disabled == true){
+    sendbtn.disabled = false;
+} else {
+    sendbtn.disabled = true;
+    }
+}
+
+</script>

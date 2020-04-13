@@ -13,11 +13,11 @@ require_once("../src/View/templates/header.php");
             </ul>
         <? endif; ?>
     <div class="container"><!--login form-->
-        <h2>Авторизация на сайте</h2>
+        <h1>Авторизация на сайте</h1>
             <form action="#" method="post">
                 <input type="email" name="email" placeholder="E-mail" value="<? echo $email ?>"/>
                 <input type="password" name="password" placeholder="Пароль" value=""/>
-                <input class="submitbtn" type="submit" name="submit" class="btn btn-default" value="Авторизация" />                
+                <input class="submitbtn" type="submit" name="submit" class="btn btn-default" value="Войти" />                
              </form>
     </div><!--/login form-->
 </section>

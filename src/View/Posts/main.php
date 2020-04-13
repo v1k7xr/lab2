@@ -8,13 +8,13 @@ require_once("../src/View/templates/whoiswho.php");
     <? foreach ($newPostsList as $post): ?>
         <div class="container-fluid">
 	<div class="row row-border-margin">
-		<div class="col-md-4 clrsd">
+		<div class="col-md-4 clrsd bg-dark">
         <span class="badge badge-success"><a href="http://localhost:9000/posts/<? echo $post['postid'] ?>"> Имя поста: <? echo $post['postname']; ?> </a></span> <br>
 		</div>
-		<div class="col-md-4 clrsd">
-        <span class="badge badge-success">Автор: <? echo $post['authorname']; ?> </span> <br>
+		<div class="col-md-4 clrsd bg-dark">
+        <span class="badge badge-success bg-dark">Автор: <? echo $post['authorname']; ?> </span> <br>
 		</div>
-		<div class="col-md-4 clrsd">
+		<div class="col-md-4 clrsd bg-dark">
         <span class="badge badge-success">Дата создания: <? echo $post['date']; ?></span> <br>
 		</div>
 	</div>
