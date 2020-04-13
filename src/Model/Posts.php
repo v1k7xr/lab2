@@ -113,7 +113,7 @@ class Posts {
                     "filenamehashsum" => $md5hashsum,
                 ];
             } else {
-                $message = date("[Y-m-d H:i:s]") . " / File with : name from user - " . $file['filename'] . ", hashsum - " . $md5hashsum . " was not loaded\n";
+                $message = date("[Y-m-d H:i:s]") . " / File with : name from user - " . $file['filename'] . ", hashsum - " . $md5hashsum . " was not loaded on server\n";
                 error_log($message, 3, "../logs/lgs.log");
                 $uploaded = false;
             }
@@ -126,6 +126,12 @@ class Posts {
         }
     }
 
+
+    /**
+     * Returns id of newly created post
+     * @param array $postInfo
+     * @return int $id
+     */
     public static function saveNewPostDataBase(array $postInfo) {
         $dbwPsts = new DBWPosts();
         $id = $dbwPsts->addNewPost($postInfo);
@@ -133,12 +139,22 @@ class Posts {
         return $id;
     }
 
+    /**
+     * Writes information about files in the database
+     * @param array $filesOnServer
+     * @param int $postId
+     */
     public static function saveFilesInfo(array $filesOnServer, int $postId) {
         $dbwPsts = new DBWPosts();
         $dbwPsts->addNewFiles($filesOnServer, $postId);
         $dbwPsts->closeConnection();
     }
 
+    /**
+     * Returns true if all alright with name of the post
+     * @param string $postName
+     * @return bool
+     */
     public static function checkPostName(string $postName) : bool {
         if (strlen($postName) > 0) {
             return true;
@@ -146,6 +162,11 @@ class Posts {
         return false;
     }
 
+    /**
+     * Returns true if all alright with description of the post
+     * @param string $postDescription
+     * @return bool
+     */
     public static function checkPostDescription(string $postDescription) : bool {
         if (strlen($postDescription) > 0) {
             return true;
@@ -153,6 +174,11 @@ class Posts {
         return false;
     }
 
+    /**
+     * Returns true if all alright with count of the uploadpost
+     * @param int $fileCount
+     * @return bool
+     */
     public static function checkFilesCount($fileCount) {
         if ($fileCount > 0 && $fileCount < 10) { // 10 - max upload files in php.ini
             return true;
@@ -160,6 +186,11 @@ class Posts {
         return false;
     }
 
+    /**
+     * Returns information about files in server
+     * @param $id (post id)
+     * @return array $filesInfo
+     */
     public static function getFiles(int $id) : array {
         $dbwPsts = new DBWPosts();
         $filesInfo = $dbwPsts->getAllFilesInfo($id);
@@ -167,12 +198,22 @@ class Posts {
         return $filesInfo;
     }
 
+    /**
+     * Upload single file to user
+     * @param string $fileNameUser
+     * @param string $fileNameServer
+     */
     public static function uploadFile(string $fileNameUser, string $fileNameServer) {
         $fullDir = Posts::getDir($fileNameUser, $fileNameServer);
 
         Posts::upload($fileNameUser, $fullDir);
     }
 
+    /**
+     * Upload all files in post to user
+     * @param string $postName
+     * @param array $files
+     */
     public static function uploadAllFilesZip(array $files, string $postName) {
         $tempFilePath = "tempzip/" . time() . ".zip";
         $pathToFile = "";
@@ -195,6 +236,9 @@ class Posts {
         unlink(realpath($tempFilePath));
     }
 
+    /**
+     * Work with client browser
+     */
     public static function upload($fileNameUser, $fileNameOnServer) {
         if (file_exists($fileNameOnServer)) {
             // buff staff clean
@@ -204,7 +248,7 @@ class Posts {
             // open save window in browser
             header('Content-Description: File Transfer');
             header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename=' . $fileNameUser);
+            header('Content-Disposition: attachment; filename="' . $fileNameUser . '"');
             header('Content-Transfer-Encoding: binary');
             header('Expires: 0');
             header('Cache-Control: must-revalidate');
@@ -216,6 +260,12 @@ class Posts {
           }
     }
 
+    /**
+     * Returns the path to the client file with its extension
+     * @param string $fileNameUser
+     * @param string $fileNameOnServer
+     * @return string @mainDir
+     */
     public static function getDir(string $fileNameUser, string $fileNameOnServer) {
         $maindir = "../storagedir/";
         $re = '/\.[a-z]{3,4}$/m';

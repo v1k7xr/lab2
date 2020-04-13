@@ -4,6 +4,7 @@ require_once("DataBaseWorker.php");
 
 class DBWUser extends DataBaseWorker {
 
+    
     public function checkEmailNovelty(string $email) : bool {
         $this->startConnection();
 

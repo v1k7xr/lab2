@@ -2,7 +2,7 @@
 
 require_once("DataBaseWorker.php");
 
-function compareByTimeStamp($arr1, $arr2) 
+function compareByTimeStamp($arr1, $arr2) // for sort posts by date
 { 
     if (strtotime($arr1['date']) < strtotime($arr2['date'])) 
         return 1; 
