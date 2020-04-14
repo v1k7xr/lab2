@@ -13,6 +13,8 @@
 Пример:
 - GRANT ALL PRIVILEGES ON {database name} TO username;
 - GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public to username;
+
+
 Сама структура БД -> [imgur](https://imgur.com/a/QMENf2o)
 
 
