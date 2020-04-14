@@ -7,7 +7,9 @@
 
 База данных, используемая в проекте - Postgresql.
 [Скрипт создания бд](https://github.com/v1k7xr/lab2/blob/master/dumpSchema.sql)
+
 Для работы проекта нужно дать [права на всё](https://www.postgresql.org/docs/9.0/sql-grant.html) в таблице тому юзeру, который записан в dbConf.json 
+
 Пример:
 - GRANT ALL PRIVILEGES ON {database name} TO username;
 - GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public to username;
