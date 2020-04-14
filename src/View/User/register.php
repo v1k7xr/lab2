@@ -11,7 +11,7 @@ require_once("../src/View/templates/header.php");
         <? if (isset($errors) && is_array($errors)): ?>
             <ul>
                 <? foreach ($errors as $error): ?>
-                    <li> - <? echo $error; ?> </li>
+                    <li> <p> <? echo $error; ?> </p> </li>
                 <? endforeach; ?>
             </ul>
         <? endif; ?>

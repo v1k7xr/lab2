@@ -1,0 +1,9 @@
+{
+    "dbconnection" : {
+        "dbname" : "name of your database",
+        "host" : "host name",
+        "port" : "port number",
+        "username" : "u'r username",
+        "userpsswrd" : "u'r password "
+    }
+}
